@@ -57,26 +57,26 @@ angular.module 'builder.controller', ['builder.provider']
             ###
             Backup input value.
             ###
+            previousOptions = angular.copy($scope.options)
             @model =
                 label: $scope.label
                 description: $scope.description
                 placeholder: $scope.placeholder
                 required: $scope.required
                 validation: $scope.validation
-                options: angular.copy($scope.options)
-            return
+                options: previousOptions
         rollback: ->
             ###
             Rollback input value.
             ###
             return if not @model
+            backupOptions = angular.copy(@model.options)
             $scope.label = @model.label
             $scope.description = @model.description
             $scope.placeholder = @model.placeholder
             $scope.required = @model.required
             $scope.validation = @model.validation
-            $scope.options = angular.copy(@model.options)
-            return
+            $scope.options = backupOptions
 ]
 
 
